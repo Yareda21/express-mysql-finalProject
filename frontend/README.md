@@ -1,0 +1,2 @@
+- use npm install to start the app
+- 
