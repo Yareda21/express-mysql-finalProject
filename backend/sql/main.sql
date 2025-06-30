@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS bank_db;
 USE bank_db;
 
 -- Create Branches Table
-CREATE TABLE branches (
+CREATE TABLE IF NOT EXISTS branches (
     branch_id INT PRIMARY KEY AUTO_INCREMENT,
     branch_name VARCHAR(100) NOT NULL,
     address VARCHAR(255) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE branches (
 );
 
 -- Create Employees Table
-CREATE TABLE employees (
+CREATE TABLE IF NOT EXISTS employees (
     employee_id INT PRIMARY KEY AUTO_INCREMENT,
     branch_id INT,
     first_name VARCHAR(50) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE employees (
 );
 
 -- Create Customers Table
-CREATE TABLE customers (
+CREATE TABLE IF NOT EXISTS customers (
     customer_id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE customers (
 );
 
 -- Create Account Types Table
-CREATE TABLE account_types (
+CREATE TABLE IF NOT EXISTS account_types (
     type_id INT PRIMARY KEY AUTO_INCREMENT,
     type_name VARCHAR(50) NOT NULL,
     description TEXT,
@@ -54,7 +54,7 @@ CREATE TABLE account_types (
 );
 
 -- Create Accounts Table
-CREATE TABLE accounts (
+CREATE TABLE IF NOT EXISTS accounts (
     account_id INT PRIMARY KEY AUTO_INCREMENT,
     customer_id INT NOT NULL,
     branch_id INT NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE accounts (
 );
 
 -- Create Transactions Table
-CREATE TABLE transactions (
+CREATE TABLE IF NOT EXISTS transactions (
     transaction_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT NOT NULL,
     transaction_type ENUM('deposit', 'withdrawal', 'transfer', 'interest') NOT NULL,
