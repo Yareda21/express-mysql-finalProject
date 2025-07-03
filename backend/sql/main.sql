@@ -143,16 +143,24 @@ JOIN branches b ON a.branch_id = b.branch_id;
 -- Create a stored procedure for transferring money between accounts
 DELIMITER //
 CREATE PROCEDURE transfer_money(
-    IN from_account_id INT,
-    IN to_account_id INT,
+    IN from_account_number VARCHAR(20),
+    IN to_account_number VARCHAR(20),
     IN transfer_amount DECIMAL(15,2)
 )
 BEGIN
+    DECLARE from_account_id INT;
+    DECLARE to_account_id INT;
+
+
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Transfer failed';
     END;
+    
+    -- Get account IDs from account numbers
+    SELECT account_id INTO from_account_id FROM accounts WHERE account_number = from_account_number;
+    SELECT account_id INTO to_account_id FROM accounts WHERE account_number = to_account_number;
 
     START TRANSACTION;
     

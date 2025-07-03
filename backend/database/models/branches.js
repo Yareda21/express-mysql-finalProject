@@ -63,7 +63,7 @@ async function removeBranch(branch_id) {
     return result.affectedRows;
 }
 
-module.exports = {
+export {
     getAllBranches,
     getBranchById,
     createBranch,
